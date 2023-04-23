@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ApiService {
-    public ResponseModel getAnswer(RequestModel requestModel);
+    ResponseModel getAnswer(RequestModel requestModel);
 }

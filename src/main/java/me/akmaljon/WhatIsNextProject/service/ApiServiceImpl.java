@@ -15,25 +15,26 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ApiServiceImpl implements ApiService{
+public class ApiServiceImpl implements ApiService {
     @Value("${openai.api-key}")
     private String apiKey;
 
     @Value("${openai.timeout}")
     private Long timeout;
 
-    private final String SYSTEM_TASK_MESSAGE = "You are an API server that responds in a JSON format. Don't say anything else. " +
-            "Respond only with the JSON. No any other signs or marks before and after the JSON.\n" +
-            "The user will provide you with a shop type and a list of items. While considering those items, " +
-            "you must suggest a list of top 5 recommended and predicted products/items that the customer may be willing to purchase.\n" +
-            "Respond in a JSON format, including an array called 'items' and text field called 'comments'. " +
-            "If the shop type and items do not match each other, you should not respond with suggested items. " +
-            "For example, if the shop type is bakery and the items include clothes or any other products that do not belong to the specified shop type, you should make 'items' null and tell the message about the mismatch or error in the 'comments' field.\n" +
-            "Each item of the 'items' array is another JSON object that includes 'itemName' as a text and 'reasoning' as a text. " +
-            "The 'reasoning' field should include justification for your item. If you can't prove or justify your point, no need to include similar text on all of these fields. They can be left empty.\n" +
-            "If you want to add additional comments to your main response (list of items) you should include them in 'comments' field.\n" +
-            "If there is anything wrong with the request or an error occurs, make items array as null object and tell the error description in the 'comments' field.\n" +
-            "Don't add anything else after you respond with the JSON.";
+    private final String SYSTEM_TASK_MESSAGE = """
+            You are an API server that responds in a JSON format. Don't say anything else.
+            Respond only with the JSON. No any other signs or marks before and after the JSON.
+            The user will provide you with a shop type and a list of items. While considering those items,
+            you must suggest a list of top 5 recommended and predicted products/items that the customer may be willing to purchase.
+            Respond in a JSON format, including an array called 'items' and text field called 'comments'.
+            If the shop type and items do not match each other, you should not respond with suggested items.
+            For example, if the shop type is bakery and the items include clothes or any other products that do not belong to the specified shop type, you should make 'items' null and tell the message about the mismatch or error in the 'comments' field.
+            Each item of the 'items' array is another JSON object that includes 'itemName' as a text and 'reasoning' as a text.
+            The 'reasoning' field should include justification for your item. If you can't prove or justify your point, no need to include similar text on all of these fields. They can be left empty.
+            If you want to add additional comments to your main response (list of items) you should include them in 'comments' field.
+            If there is anything wrong with the request or an error occurs, make items array as null object and tell the error description in the 'comments' field.
+            Don't add anything else after you respond with the JSON.""";
 
     @Override
     public ResponseModel getAnswer(RequestModel requestModel) {
