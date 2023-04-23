@@ -10,11 +10,4 @@ import java.util.List;
 public class ResponseModel {
     private List<ResponseItem> items;
     private String comments;
-
-    public ResponseModel(String comments) {
-        this.comments = comments;
-    }
-
-    public ResponseModel() {
-    }
 }

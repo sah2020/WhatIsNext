@@ -1,6 +1,5 @@
 package me.akmaljon.WhatIsNextProject;
 
-import me.akmaljon.WhatIsNextProject.entity.ShopTypeEnum;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
