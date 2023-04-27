@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+}
+
+.App {
+    width: 70vh;
+    margin: 5rem auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form-field {
+    flex: 2;
+}
+
+.output {
+    margin-left: 3rem;
+    flex: 1;
+}
+
+.form-field label,
+h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(84, 84, 84);
+}
+
+input {
+    height: 35px;
+    width: 100%;
+    padding: 7px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+input:focus {
+    border: 1px solid rgb(0, 208, 255);
+}
+
+.items {
+    display: flex;
+    justify-content: space-between;
+}
+
+.first-division {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px 0.5rem 0;
+    width: 100%;
+}
+
+button {
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 2px;
+    padding: 5px 10px;
+}
+
+.first-division button {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    color: rgb(0, 208, 255);
+    border: 1px solid rgb(0, 208, 255);
+}
+
+.second-division button {
+    color: red;
+    border: 1px solid red;
+}
+
+.submit-btn {
+    color: blueviolet;
+    border: 1px solid blueviolet;
+}
+
+/* Loading Spinner */
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #383636; /* Blue */
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+}
+
+.spinner-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+}
