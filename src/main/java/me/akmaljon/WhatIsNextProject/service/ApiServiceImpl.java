@@ -7,10 +7,13 @@ import com.theokanning.openai.service.OpenAiService;
 import lombok.extern.slf4j.Slf4j;
 import me.akmaljon.WhatIsNextProject.entity.RequestModel;
 import me.akmaljon.WhatIsNextProject.entity.ResponseModel;
+import me.akmaljon.WhatIsNextProject.entity.ShopTypeEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -39,6 +42,16 @@ public class ApiServiceImpl implements ApiService {
     @Override
     public ResponseModel getAnswer(RequestModel requestModel) {
 
+        if (!StringUtils.hasText(requestModel.getShopType())) {
+            throw new RuntimeException("ShopType is empty");
+        }
+
+        if (Arrays.stream(ShopTypeEnum.values())
+                .map(ShopTypeEnum::toString)
+                .noneMatch(type -> type.equals(requestModel.getShopType()))) {
+            throw new RuntimeException("Shop type is not found");
+        }
+
         OpenAiService openAiService = new OpenAiService(apiKey, Duration.ofSeconds(timeout));
 
         ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
@@ -49,21 +62,24 @@ public class ApiServiceImpl implements ApiService {
                         List.of(
                                 new ChatMessage("system", SYSTEM_TASK_MESSAGE),
                                 new ChatMessage("user", String.format("Imagine customer in %s bought %s",
-                                        requestModel.getShopType().toString(), requestModel.getItems().toString()))))
+                                        requestModel.getShopType(), requestModel.getItems()))))
                 .build();
 
         StringBuilder builder = new StringBuilder();
 
         openAiService.createChatCompletion(chatCompletionRequest)
-                .getChoices().forEach(choice -> {
-                    builder.append(choice.getMessage().getContent());
-                });
+                .getChoices().forEach(choice -> builder.append(choice.getMessage().getContent()));
 
         String jsonResponse = builder.toString();
         log.info(jsonResponse);
 
         Gson gson = new Gson();
         return gson.fromJson(jsonResponse, ResponseModel.class);
+    }
+
+    @Override
+    public List<String> getShopTypesList() {
+        return Arrays.stream(ShopTypeEnum.values()).map(ShopTypeEnum::toString).toList();
     }
 
 }
