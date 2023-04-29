@@ -16,7 +16,7 @@ const ShopTypes = () => {
 
 
     const fetchShopTypes = () => {
-        axios.get("http://localhost:8080/api/v1/shops").then(res => {
+        axios.get("http://34.163.228.96:8080/api/v1/shops").then(res => {
             console.log(res);
             setShopTypes(res.data);
         })
@@ -57,7 +57,7 @@ const ShopTypes = () => {
             // make axios post request
             const response = await axios({
                 method: "post",
-                url: "http://localhost:8080/api/v1/answer",
+                url: "http://34.163.228.96:8080/api/v1/answer",
                 data: {
                     shopType: shopType,
                     items: itemList.toString()
