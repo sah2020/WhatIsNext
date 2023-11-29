@@ -1,4 +1,4 @@
-# WhatIsNext
+u# WhatIsNext
 
 WhatIsNext is a store recommendation engine that suggests additional products based on past purchases. Personalized recommendations are provided to increase customer satisfaction and boost sales.
 
@@ -23,6 +23,11 @@ Live Demo is available on `http://34.163.228.96/` (in case of May 2023)
 2. Start the backend by running `mvn spring-boot:run`
 3. Start the frontend by running `npm start`
 4. Open a web browser and navigate to `http://localhost:3000` to access the application
+
+## Screenshots
+
+![image](https://github.com/sah2020/WhatIsNext/assets/69834171/5b682e13-f970-4767-8a1d-88e6ff7009af)
+![image](https://github.com/sah2020/WhatIsNext/assets/69834171/f9d0088d-83eb-437b-a87c-812e95a3c97b)
 
 
 ## Contributing
