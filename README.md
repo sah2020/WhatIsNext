@@ -1,4 +1,4 @@
-u# WhatIsNext
+# WhatIsNext
 
 WhatIsNext is a store recommendation engine that suggests additional products based on past purchases. Personalized recommendations are provided to increase customer satisfaction and boost sales.
 
